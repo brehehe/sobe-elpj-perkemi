@@ -69,3 +69,4 @@ Scheduler membuat backup database setiap hari, membersihkan backup lama, lalu me
 
 Sebelum produksi, organisasi masih perlu menetapkan authority matrix nilai anggaran, sumber SSO/ledger nyata, kebijakan klasifikasi dan retensi, checklist per jenis kegiatan, serta format verified pack/QR final sebagaimana dicatat di `md/flow.md`.
 # sobe-elpj-perkemi
+# sobe-elpj-perkemi
