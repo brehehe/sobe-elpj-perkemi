@@ -1,0 +1,2109 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Smart e-LPJ V2 • SOBE PB PERKEMI</title>
+    <style>
+        :root {
+            --nav: #071d33;
+            --nav2: #0d2b4a;
+            --blue: #1769e0;
+            --green: #159957;
+            --orange: #e98a12;
+            --red: #d83e3e;
+            --purple: #7048d8;
+            --bg: #f3f7fb;
+            --line: #dce6f1;
+            --ink: #10243c;
+            --mut: #65758a
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, Segoe UI, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--ink)
+        }
+
+        .app {
+            display: grid;
+            grid-template-columns: 285px 1fr;
+            min-height: 100vh
+        }
+
+        .side {
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow: auto;
+            background: linear-gradient(180deg, var(--nav), #061524);
+            color: #d8e6f3;
+            padding: 15px 12px
+        }
+
+        .brand {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #29445e
+        }
+
+        .logo {
+            width: 47px;
+            height: 47px;
+            border-radius: 50%;
+            background: #ffbd24;
+            color: #09233d;
+            display: grid;
+            place-items: center;
+            font-weight: 900;
+            border: 3px solid #fff
+        }
+
+        .brand b {
+            font-size: 19px;
+            color: white
+        }
+
+        .brand small {
+            font-size: 9px
+        }
+
+        .grp {
+            margin-top: 15px
+        }
+
+        .lab {
+            font-size: 9px;
+            letter-spacing: 1px;
+            color: #829eb8;
+            margin: 8px
+        }
+
+        .nav {
+            padding: 9px 10px;
+            border-radius: 8px;
+            margin: 2px 0;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            gap: 9px
+        }
+
+        .nav:hover,
+        .nav.on {
+            background: linear-gradient(90deg, #1769e0, #2e82f1);
+            color: #fff
+        }
+
+        .ico {
+            width: 23px;
+            text-align: center
+        }
+
+        .main {
+            min-width: 0
+        }
+
+        .top {
+            height: 60px;
+            background: white;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            padding: 0 18px;
+            gap: 14px;
+            position: sticky;
+            top: 0;
+            z-index: 5
+        }
+
+        .search {
+            border: 1px solid #cad8e7;
+            border-radius: 8px;
+            padding: 9px 12px;
+            max-width: 650px;
+            flex: 1;
+            color: #718198
+        }
+
+        .user {
+            margin-left: auto;
+            font-size: 10px
+        }
+
+        .content {
+            padding: 16px
+        }
+
+        .page {
+            display: none
+        }
+
+        .page.on {
+            display: block
+        }
+
+        .hero {
+            background: linear-gradient(110deg, #e6f2ff, #fbfdff);
+            border: 1px solid #d7e7f6;
+            border-radius: 13px;
+            padding: 17px 19px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 23px
+        }
+
+        .hero p {
+            font-size: 11px;
+            color: #506a84;
+            margin: 4px 0
+        }
+
+        .pill {
+            font-size: 8px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: #ddecff;
+            color: #1769e0;
+            font-weight: 800
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 8px;
+            padding: 9px 11px;
+            font-size: 9px;
+            font-weight: 800;
+            cursor: pointer
+        }
+
+        .blue {
+            background: var(--blue);
+            color: #fff
+        }
+
+        .green {
+            background: var(--green);
+            color: #fff
+        }
+
+        .gray {
+            background: #edf3f9;
+            color: #314b65
+        }
+
+        .orange {
+            background: #fff0d8;
+            color: #9b5c00
+        }
+
+        .red {
+            background: #ffe3e3;
+            color: #a51f1f
+        }
+
+        .grid {
+            display: grid;
+            gap: 11px
+        }
+
+        .kpis {
+            grid-template-columns: repeat(6, 1fr);
+            margin-top: 11px
+        }
+
+        .two {
+            grid-template-columns: 1.25fr .75fr;
+            margin-top: 11px
+        }
+
+        .three {
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 11px
+        }
+
+        .four {
+            grid-template-columns: repeat(4, 1fr);
+            margin-top: 11px
+        }
+
+        .modules {
+            grid-template-columns: repeat(4, 1fr);
+            margin-top: 11px
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            padding: 13px;
+            box-shadow: 0 2px 8px #16324b0a
+        }
+
+        .kpi small {
+            font-size: 8px;
+            color: var(--mut)
+        }
+
+        .kpi strong {
+            font-size: 20px;
+            display: block;
+            margin-top: 5px
+        }
+
+        .title {
+            font-size: 12px;
+            font-weight: 850;
+            margin-bottom: 9px
+        }
+
+        .sub {
+            font-size: 8px;
+            color: var(--mut)
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.5px
+        }
+
+        th {
+            background: #edf4fb;
+            padding: 7px;
+            text-align: left
+        }
+
+        td {
+            padding: 7px;
+            border-bottom: 1px solid #e5edf5
+        }
+
+        .st {
+            padding: 3px 6px;
+            border-radius: 999px;
+            font-size: 7.5px;
+            font-weight: 800
+        }
+
+        .ok {
+            background: #ddf7e8;
+            color: #08723b
+        }
+
+        .pend {
+            background: #fff0d8;
+            color: #985c00
+        }
+
+        .bad {
+            background: #ffe0e0;
+            color: #a52020
+        }
+
+        .info {
+            background: #e2efff;
+            color: #175dbd
+        }
+
+        .form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px
+        }
+
+        .f label {
+            font-size: 8px;
+            color: #68798e;
+            display: block;
+            margin-bottom: 3px
+        }
+
+        .f input,
+        .f select,
+        .f textarea {
+            width: 100%;
+            border: 1px solid #cfdeeb;
+            border-radius: 7px;
+            padding: 8px;
+            background: #fbfdff;
+            font-size: 9px
+        }
+
+        .f textarea {
+            min-height: 66px
+        }
+
+        .actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 10px
+        }
+
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            overflow: auto;
+            padding: 7px
+        }
+
+        .node {
+            min-width: 112px;
+            padding: 9px;
+            background: #f8fbff;
+            border: 1px solid #d6e3ef;
+            border-radius: 9px;
+            text-align: center;
+            font-size: 8px
+        }
+
+        .arr {
+            font-weight: 900;
+            color: #7890a8
+        }
+
+        .ai {
+            background: linear-gradient(145deg, #f8f3ff, #fff);
+            border-color: #ddd0ff
+        }
+
+        .airow {
+            display: flex;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #ece6f6
+        }
+
+        .aic {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: var(--purple);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-size: 8px;
+            font-weight: 900
+        }
+
+        .airow b {
+            font-size: 8.5px
+        }
+
+        .airow p {
+            font-size: 7.5px;
+            color: #68758a;
+            margin: 2px 0
+        }
+
+        .mod {
+            min-height: 105px
+        }
+
+        .mod h3 {
+            font-size: 10px;
+            margin: 5px 0
+        }
+
+        .mod p {
+            font-size: 8px;
+            color: #68798c
+        }
+
+        .tag {
+            font-size: 7.5px;
+            background: #eef5ff;
+            padding: 3px 5px;
+            border-radius: 5px
+        }
+
+        .meter {
+            height: 7px;
+            background: #e8eef5;
+            border-radius: 10px;
+            overflow: hidden
+        }
+
+        .meter i {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, #1769e0, #14a264)
+        }
+
+        .timeline {
+            border-left: 2px solid #cfe0f2;
+            margin-left: 8px;
+            padding-left: 15px
+        }
+
+        .tl {
+            position: relative;
+            margin: 12px 0;
+            font-size: 8px
+        }
+
+        .tl:before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #1769e0;
+            position: absolute;
+            left: -20px;
+            top: 1px
+        }
+
+        .callout {
+            border-left: 4px solid var(--blue);
+            background: #eef6ff;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 8.5px
+        }
+
+        .foot {
+            font-size: 7.5px;
+            color: #738297;
+            margin-top: 8px
+        }
+
+        @media(max-width:1100px) {
+            .app {
+                grid-template-columns: 220px 1fr
+            }
+
+            .kpis,
+            .modules {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .two {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media(max-width:760px) {
+            .app {
+                display: block
+            }
+
+            .side {
+                height: auto;
+                position: relative
+            }
+
+            .kpis,
+            .modules,
+            .form,
+            .three,
+            .four {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .content {
+                padding: 9px
+            }
+        }
+
+        .chartbox {
+            height: 185px;
+            display: flex;
+            align-items: flex-end;
+            gap: 11px;
+            padding: 12px 10px 28px;
+            border-left: 1px solid #dce6f1;
+            border-bottom: 1px solid #dce6f1;
+            position: relative
+        }
+
+        .cbar {
+            flex: 1;
+            min-width: 18px;
+            border-radius: 6px 6px 0 0;
+            background: linear-gradient(180deg, #58a0ff, #1769e0);
+            position: relative
+        }
+
+        .cbar.alt {
+            background: linear-gradient(180deg, #7fd5a6, #159957)
+        }
+
+        .cbar.warn {
+            background: linear-gradient(180deg, #ffc56e, #e98a12)
+        }
+
+        .cbar:after {
+            content: attr(data-x);
+            position: absolute;
+            bottom: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 7px;
+            white-space: nowrap;
+            color: #65758a
+        }
+
+        .cbar:before {
+            content: attr(data-v);
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 7px;
+            font-weight: 800;
+            color: #40566d
+        }
+
+        .legend {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 7.5px;
+            color: #65758a;
+            margin-top: 7px
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            background: #1769e0
+        }
+
+        .dot.g {
+            background: #159957
+        }
+
+        .dot.o {
+            background: #e98a12
+        }
+
+        .filterbar {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            margin: 11px 0
+        }
+
+        .filter {
+            padding: 7px 10px;
+            border: 1px solid #cfdeeb;
+            background: #fff;
+            border-radius: 8px;
+            font-size: 8px;
+            cursor: pointer
+        }
+
+        .filter.sel {
+            background: #1769e0;
+            color: #fff;
+            border-color: #1769e0
+        }
+
+        .score {
+            font-size: 25px;
+            font-weight: 900
+        }
+
+        .rec {
+            border-left: 4px solid #7048d8;
+            padding: 9px;
+            background: #faf7ff;
+            border-radius: 7px;
+            margin: 7px 0
+        }
+
+        .rec b {
+            font-size: 9px
+        }
+
+        .rec p {
+            font-size: 8px;
+            color: #68758a;
+            margin: 3px 0
+        }
+
+        .matrix td:nth-child(n+2),
+        .matrix th:nth-child(n+2) {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <aside class="side">
+            <div class="brand">
+                <div class="logo">P</div>
+                <div><b>Smart e-LPJ</b><br><small>Digital Accountability Platform<br>SOBE PB PERKEMI</small></div>
+            </div>
+            <div class="grp">
+                <div class="lab">COMMAND CENTER</div>
+                <div class="nav on" data-p="dash"><span class="ico">⌂</span>Dashboard Nasional</div>
+                <div class="nav" data-p="activityintel"><span class="ico">▥</span>Analisis Jenis Kegiatan</div>
+                <div class="nav" data-p="recommend"><span class="ico">AI</span>Rekomendasi per Kegiatan</div>
+                <div class="nav" data-p="action"><span class="ico">⚡</span>Smart Action Center</div>
+                <div class="nav" data-p="portfolio"><span class="ico">▦</span>Portfolio LPJ</div>
+            </div>
+            <div class="grp">
+                <div class="lab">INPUT KEGIATAN</div>
+                <div class="nav" data-p="mandate"><span class="ico">§</span>Mandat & Dasar Kegiatan</div>
+                <div class="nav" data-p="planning"><span class="ico">▤</span>e-Planning</div>
+                <div class="nav" data-p="budget"><span class="ico">Rp</span>e-Budget / RAB</div>
+                <div class="nav" data-p="activity"><span class="ico">▣</span>Pelaksanaan Kegiatan</div>
+                <div class="nav" data-p="participant"><span class="ico">◉</span>Peserta & SDM</div>
+                <div class="nav" data-p="transaction"><span class="ico">⇄</span>Transaksi & Realisasi</div>
+                <div class="nav" data-p="evidence"><span class="ico">▧</span>Evidence Center</div>
+                <div class="nav" data-p="evaluation"><span class="ico">✓</span>Evaluasi & Outcome</div>
+            </div>
+            <div class="grp">
+                <div class="lab">PERTANGGUNGJAWABAN</div>
+                <div class="nav" data-p="composer"><span class="ico">≡</span>LPJ Composer</div>
+                <div class="nav" data-p="submit"><span class="ico">↑</span>Submit & Snapshot</div>
+                <div class="nav" data-p="verify"><span class="ico">☑</span>Digital Verification</div>
+                <div class="nav" data-p="disposition"><span class="ico">✉</span>Disposisi Digital</div>
+                <div class="nav" data-p="finding"><span class="ico">!</span>Findings & CAPA</div>
+                <div class="nav" data-p="approval"><span class="ico">◆</span>Approval e-LPJ</div>
+                <div class="nav" data-p="verified"><span class="ico">✓</span>PB VERIFIED</div>
+                <div class="nav" data-p="archive"><span class="ico">▰</span>Digital Archive</div>
+            </div>
+            <div class="grp">
+                <div class="lab">ANALYTICS & GOVERNANCE</div>
+                <div class="nav" data-p="finance"><span class="ico">₿</span>Finance & Rekonsiliasi</div>
+                <div class="nav" data-p="ai"><span class="ico">AI</span>AI LPJ Intelligence</div>
+                <div class="nav" data-p="next"><span class="ico">↻</span>AI Kegiatan Berikutnya</div>
+                <div class="nav" data-p="hierarchy"><span class="ico">↥</span>Hierarki PB–Dojo</div>
+                <div class="nav" data-p="integration"><span class="ico">⚙</span>Integration Hub</div>
+                <div class="nav" data-p="audit"><span class="ico">⌕</span>Audit & Compliance</div>
+            </div>
+        </aside>
+        <main class="main">
+            <header class="top"><b>☰</b>
+                <div class="search">⌕ &nbsp; Cari Activity-ID, LPJ-ID, transaksi, evidence, unit, finding...</div>
+                <div class="user">🔔 8 &nbsp; <b>National Accountability User</b> · SOBE</div>
+            </header>
+            <div class="content">
+
+                <section id="dash" class="page on">
+                    <div class="hero">
+                        <div><span class="pill">SOBE • NATIONAL ACCOUNTABILITY</span>
+                            <h1>Smart e-LPJ Command Center</h1>
+                            <p>Mandat → kegiatan → keuangan → evidence → verifikasi → approval → archive → AI
+                                organizational learning.</p>
+                        </div><button class="btn blue" onclick="go('mandate')">+ Registrasi Kegiatan</button>
+                    </div>
+                    <div class="grid kpis">
+                        <div class="card kpi"><small>Kegiatan Aktif</small><strong>128</strong></div>
+                        <div class="card kpi"><small>LPJ Submitted</small><strong>94</strong></div>
+                        <div class="card kpi"><small>Verified</small><strong>76</strong></div>
+                        <div class="card kpi"><small>Open Findings</small><strong>17</strong></div>
+                        <div class="card kpi"><small>Reconciled</small><strong>96%</strong></div>
+                        <div class="card kpi"><small>Evidence Quality</small><strong>93%</strong></div>
+                    </div>
+                    <div class="grid two">
+                        <div class="card">
+                            <div class="title">End-to-End Accountability Pipeline</div>
+                            <div class="flow">
+                                <div class="node">Mandate-ID</div><b>→</b>
+                                <div class="node">Plan</div><b>→</b>
+                                <div class="node">Budget</div><b>→</b>
+                                <div class="node">Activity-ID</div><b>→</b>
+                                <div class="node">Transaction</div><b>→</b>
+                                <div class="node">Evidence</div>
+                            </div>
+                            <div class="flow">
+                                <div class="node">LPJ Composer</div><b>→</b>
+                                <div class="node">Verification</div><b>→</b>
+                                <div class="node">Disposition/CAPA</div><b>→</b>
+                                <div class="node">Approval</div><b>→</b>
+                                <div class="node">Verified</div><b>→</b>
+                                <div class="node">Archive + AI</div>
+                            </div>
+                        </div>
+                        <div class="card ai">
+                            <div class="title">AI Accountability Brief</div>
+                            <div class="airow">
+                                <div class="aic">AI</div>
+                                <div><b>9 LPJ berisiko melewati SLA</b>
+                                    <p>Faktor: evidence belum lengkap dan antrean verifikasi keuangan.</p>
+                                </div>
+                            </div>
+                            <div class="airow">
+                                <div class="aic">AI</div>
+                                <div><b>3 pola temuan berulang</b>
+                                    <p>Dominan pada keterlambatan evidence, rekonsiliasi dan dokumentasi outcome.</p>
+                                </div>
+                            </div>
+                            <div class="airow">
+                                <div class="aic">AI</div>
+                                <div><b>Rekomendasi kegiatan berikutnya tersedia</b>
+                                    <p>Berbasis LPJ verified, outcome, biaya, partisipasi dan lessons learned.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid two">
+                        <div class="card">
+                            <div class="title">Grafik Portfolio Kegiatan — Outcome Index</div>
+                            <div class="chartbox">
+                                <div class="cbar" style="height:84%" data-x="Penataran" data-v="84"></div>
+                                <div class="cbar alt" style="height:91%" data-x="Kejuaraan" data-v="91"></div>
+                                <div class="cbar" style="height:78%" data-x="Raker" data-v="78"></div>
+                                <div class="cbar alt" style="height:87%" data-x="Pembinaan" data-v="87"></div>
+                                <div class="cbar warn" style="height:73%" data-x="Sosialisasi" data-v="73"></div>
+                            </div>
+                            <div class="foot">Data demonstratif prototype; produksi menggunakan data LPJ VERIFIED per
+                                jenis kegiatan.</div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Distribusi Status LPJ per Jenis</div>
+                            <table>
+                                <tr>
+                                    <th>Jenis</th>
+                                    <th>Total</th>
+                                    <th>Verified</th>
+                                    <th>Review</th>
+                                    <th>Finding</th>
+                                </tr>
+                                <tr>
+                                    <td>Penataran</td>
+                                    <td>24</td>
+                                    <td>18</td>
+                                    <td>5</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Kejuaraan</td>
+                                    <td>19</td>
+                                    <td>15</td>
+                                    <td>3</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Raker/Rapat</td>
+                                    <td>31</td>
+                                    <td>27</td>
+                                    <td>4</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Pembinaan</td>
+                                    <td>28</td>
+                                    <td>21</td>
+                                    <td>5</td>
+                                    <td>2</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="grid two">
+                        <div class="card">
+                            <div class="title">Tren Penyelesaian LPJ — 6 Periode</div>
+                            <div class="chartbox">
+                                <div class="cbar" style="height:55%" data-x="P1" data-v="55%"></div>
+                                <div class="cbar" style="height:64%" data-x="P2" data-v="64%"></div>
+                                <div class="cbar" style="height:70%" data-x="P3" data-v="70%"></div>
+                                <div class="cbar" style="height:76%" data-x="P4" data-v="76%"></div>
+                                <div class="cbar" style="height:83%" data-x="P5" data-v="83%"></div>
+                                <div class="cbar alt" style="height:91%" data-x="P6" data-v="91%"></div>
+                            </div>
+                        </div>
+                        <div class="card ai">
+                            <div class="title">AI Portfolio Recommendation</div>
+                            <div class="rec"><b>Penataran</b>
+                                <p>Standarkan evidence capture per sesi dan aktifkan rekonsiliasi harian untuk
+                                    mengurangi waktu finalisasi LPJ.</p>
+                            </div>
+                            <div class="rec"><b>Kejuaraan</b>
+                                <p>Pertahankan digital participant flow; fokus perbaikan pada evidence vendor dan
+                                    settlement.</p>
+                            </div>
+                            <div class="rec"><b>Pembinaan</b>
+                                <p>Gunakan outcome longitudinal dan attendance trend agar dampak kegiatan dapat
+                                    dibandingkan antarperiode.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section id="activityintel" class="page">
+                    <div class="hero">
+                        <div><span class="pill">LIKE-FOR-LIKE ANALYTICS</span>
+                            <h1>Analisis Kegiatan Sama & Sejenis</h1>
+                            <p>Kegiatan dikelompokkan menurut taxonomy; pembandingan dilakukan dalam kelompok yang
+                                sebanding.</p>
+                        </div><button class="btn blue">Export Activity Intelligence</button>
+                    </div>
+                    <div class="filterbar"><button class="filter sel">Penataran</button><button
+                            class="filter">Kejuaraan</button><button class="filter">Raker/Rapat</button><button
+                            class="filter">Pembinaan</button><button class="filter">Ujian</button><button
+                            class="filter">Sosialisasi</button><button class="filter">Lainnya</button></div>
+                    <div class="grid kpis">
+                        <div class="card kpi"><small>Kegiatan Sejenis</small><strong>24</strong></div>
+                        <div class="card kpi"><small>Median Peserta</small><strong>148</strong></div>
+                        <div class="card kpi"><small>Outcome Index</small><strong>84</strong></div>
+                        <div class="card kpi"><small>Budget Accuracy</small><strong>96%</strong></div>
+                        <div class="card kpi"><small>Evidence Quality</small><strong>92%</strong></div>
+                        <div class="card kpi"><small>Median LPJ SLA</small><strong>7 hari</strong></div>
+                    </div>
+                    <div class="grid two">
+                        <div class="card">
+                            <div class="title">Penataran — Outcome Index Historis</div>
+                            <div class="chartbox">
+                                <div class="cbar" style="height:68%" data-x="2024-A" data-v="68"></div>
+                                <div class="cbar" style="height:74%" data-x="2024-B" data-v="74"></div>
+                                <div class="cbar" style="height:79%" data-x="2025-A" data-v="79"></div>
+                                <div class="cbar" style="height:82%" data-x="2025-B" data-v="82"></div>
+                                <div class="cbar alt" style="height:86%" data-x="2026-A" data-v="86"></div>
+                                <div class="cbar alt" style="height:89%" data-x="2026-B" data-v="89"></div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="title">Penataran — Biaya per Peserta (Index)</div>
+                            <div class="chartbox">
+                                <div class="cbar warn" style="height:88%" data-x="2024-A" data-v="88"></div>
+                                <div class="cbar warn" style="height:82%" data-x="2024-B" data-v="82"></div>
+                                <div class="cbar" style="height:76%" data-x="2025-A" data-v="76"></div>
+                                <div class="cbar" style="height:72%" data-x="2025-B" data-v="72"></div>
+                                <div class="cbar alt" style="height:67%" data-x="2026-A" data-v="67"></div>
+                                <div class="cbar alt" style="height:64%" data-x="2026-B" data-v="64"></div>
+                            </div>
+                            <div class="foot">Index demonstratif: semakin rendah menunjukkan biaya relatif lebih efisien
+                                setelah normalisasi.</div>
+                        </div>
+                    </div>
+                    <div class="grid two">
+                        <div class="card">
+                            <div class="title">Comparative Matrix — Penataran Sejenis</div>
+                            <table class="matrix">
+                                <tr>
+                                    <th>Kegiatan</th>
+                                    <th>Peserta</th>
+                                    <th>Outcome</th>
+                                    <th>Budget</th>
+                                    <th>Evidence</th>
+                                    <th>Finding</th>
+                                    <th>LPJ SLA</th>
+                                </tr>
+                                <tr>
+                                    <td>Penataran 2026-B</td>
+                                    <td>146</td>
+                                    <td>89</td>
+                                    <td>97%</td>
+                                    <td>95%</td>
+                                    <td>0</td>
+                                    <td>5h</td>
+                                </tr>
+                                <tr>
+                                    <td>Penataran 2026-A</td>
+                                    <td>152</td>
+                                    <td>86</td>
+                                    <td>96%</td>
+                                    <td>93%</td>
+                                    <td>1</td>
+                                    <td>7h</td>
+                                </tr>
+                                <tr>
+                                    <td>Penataran 2025-B</td>
+                                    <td>138</td>
+                                    <td>82</td>
+                                    <td>94%</td>
+                                    <td>90%</td>
+                                    <td>2</td>
+                                    <td>9h</td>
+                                </tr>
+                                <tr>
+                                    <td>Penataran 2025-A</td>
+                                    <td>141</td>
+                                    <td>79</td>
+                                    <td>92%</td>
+                                    <td>88%</td>
+                                    <td>2</td>
+                                    <td>10h</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card ai">
+                            <div class="title">AI Pattern Analysis — Penataran</div>
+                            <div class="airow">
+                                <div class="aic">1</div>
+                                <div><b>Outcome membaik konsisten</b>
+                                    <p>Kenaikan terlihat pada empat kegiatan terakhir; faktor yang berkorelasi perlu
+                                        divalidasi manusia sebelum dijadikan kebijakan.</p>
+                                </div>
+                            </div>
+                            <div class="airow">
+                                <div class="aic">2</div>
+                                <div><b>Evidence timeliness membaik</b>
+                                    <p>Kegiatan dengan evidence capture selama pelaksanaan cenderung memiliki LPJ SLA
+                                        lebih pendek.</p>
+                                </div>
+                            </div>
+                            <div class="airow">
+                                <div class="aic">3</div>
+                                <div><b>Recurring issue</b>
+                                    <p>Rekonsiliasi finance tetap menjadi titik yang perlu dikontrol sejak hari pertama
+                                        kegiatan.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="title">Taxonomy & Comparable Group Rules</div>
+                        <table>
+                            <tr>
+                                <th>Jenis Utama</th>
+                                <th>Subjenis</th>
+                                <th>Comparable Factors</th>
+                                <th>Normalisasi</th>
+                            </tr>
+                            <tr>
+                                <td>Penataran</td>
+                                <td>Pelatih/Penguji/Wasit</td>
+                                <td>level, durasi, peserta, format</td>
+                                <td>per peserta/per hari</td>
+                            </tr>
+                            <tr>
+                                <td>Kejuaraan</td>
+                                <td>Daerah/Nasional/Open</td>
+                                <td>kelas, peserta, venue, hari</td>
+                                <td>per peserta/per match</td>
+                            </tr>
+                            <tr>
+                                <td>Pembinaan</td>
+                                <td>Dojo/Atlet/SDM</td>
+                                <td>durasi, cohort, target</td>
+                                <td>per participant-hour</td>
+                            </tr>
+                            <tr>
+                                <td>Raker/Rapat</td>
+                                <td>PB/Pengprov/Pengkot</td>
+                                <td>peserta, durasi, agenda</td>
+                                <td>per participant-day</td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="recommend" class="page">
+                    <div class="hero">
+                        <div><span class="pill">AI NEXT-ACTIVITY ENGINE</span>
+                            <h1>Rekomendasi Kegiatan Berikutnya per Jenis</h1>
+                            <p>Rekomendasi dihasilkan dari kelompok kegiatan sejenis, bukan dari seluruh portfolio
+                                secara campuran.</p>
+                        </div><button class="btn blue">Generate Recommendation Pack</button>
+                    </div>
+                    <div class="filterbar"><button class="filter sel">Penataran</button><button
+                            class="filter">Kejuaraan</button><button class="filter">Raker/Rapat</button><button
+                            class="filter">Pembinaan</button><button class="filter">Ujian</button></div>
+                    <div class="grid two">
+                        <div class="card">
+                            <div class="title">Baseline Kegiatan Sejenis</div>
+                            <table>
+                                <tr>
+                                    <td>Comparable LPJ</td>
+                                    <td><b>24 verified records</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Median peserta</td>
+                                    <td>148</td>
+                                </tr>
+                                <tr>
+                                    <td>Median durasi</td>
+                                    <td>3 hari</td>
+                                </tr>
+                                <tr>
+                                    <td>Outcome trend</td>
+                                    <td>↑ meningkat</td>
+                                </tr>
+                                <tr>
+                                    <td>Recurring finding</td>
+                                    <td>Evidence & reconciliation</td>
+                                </tr>
+                                <tr>
+                                    <td>Strong practice</td>
+                                    <td>Digital registration + session evidence</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card ai">
+                            <div class="title">AI Executive Recommendation</div>
+                            <div class="rec"><b>Format kegiatan</b>
+                                <p>Pertahankan 3 hari dengan digital pre-learning untuk materi yang dapat dipelajari
+                                    sebelum tatap muka.</p>
+                            </div>
+                            <div class="rec"><b>Evidence strategy</b>
+                                <p>Evidence capture per sesi, bukan dikumpulkan setelah kegiatan selesai.</p>
+                            </div>
+                            <div class="rec"><b>Finance control</b>
+                                <p>Aktifkan daily reconciliation checkpoint dan exception owner.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid three">
+                        <div class="card ai">
+                            <div class="title">Skenario A — Efisiensi</div>
+                            <div class="score">A</div>
+                            <p class="sub">Kapasitas serupa, digitalisasi pra-kegiatan, kontrol biaya dan evidence
+                                real-time.</p>
+                            <table>
+                                <tr>
+                                    <td>Peserta</td>
+                                    <td>140–160</td>
+                                </tr>
+                                <tr>
+                                    <td>Durasi</td>
+                                    <td>3 hari</td>
+                                </tr>
+                                <tr>
+                                    <td>Focus</td>
+                                    <td>Efficiency</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card ai">
+                            <div class="title">Skenario B — Scale</div>
+                            <div class="score">B</div>
+                            <p class="sub">Kapasitas lebih besar dengan penambahan verifier dan segmentasi kelas.</p>
+                            <table>
+                                <tr>
+                                    <td>Peserta</td>
+                                    <td>180–220</td>
+                                </tr>
+                                <tr>
+                                    <td>Durasi</td>
+                                    <td>3 hari</td>
+                                </tr>
+                                <tr>
+                                    <td>Focus</td>
+                                    <td>Capacity</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card ai">
+                            <div class="title">Skenario C — Quality</div>
+                            <div class="score">C</div>
+                            <p class="sub">Cohort lebih kecil untuk pendalaman praktik dan evaluasi outcome.</p>
+                            <table>
+                                <tr>
+                                    <td>Peserta</td>
+                                    <td>100–130</td>
+                                </tr>
+                                <tr>
+                                    <td>Durasi</td>
+                                    <td>3–4 hari</td>
+                                </tr>
+                                <tr>
+                                    <td>Focus</td>
+                                    <td>Outcome</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="grid two">
+                        <div class="card">
+                            <div class="title">Recommendation Inputs</div>
+                            <table>
+                                <tr>
+                                    <th>Domain</th>
+                                    <th>Historical signal</th>
+                                    <th>Next design implication</th>
+                                </tr>
+                                <tr>
+                                    <td>Participation</td>
+                                    <td>stabil 140–155</td>
+                                    <td>baseline capacity 150</td>
+                                </tr>
+                                <tr>
+                                    <td>Outcome</td>
+                                    <td>meningkat</td>
+                                    <td>pertahankan komponen pembelajaran efektif</td>
+                                </tr>
+                                <tr>
+                                    <td>Finance</td>
+                                    <td>recon delay berulang</td>
+                                    <td>daily checkpoint</td>
+                                </tr>
+                                <tr>
+                                    <td>Evidence</td>
+                                    <td>lebih baik saat real-time</td>
+                                    <td>mandatory session evidence</td>
+                                </tr>
+                                <tr>
+                                    <td>LPJ SLA</td>
+                                    <td>turun 10h → 5h</td>
+                                    <td>pertahankan pre-assigned verifier</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card">
+                            <div class="title">Human Decision & Conversion</div>
+                            <div class="form">
+                                <div class="f"><label>Pilih Skenario</label><select>
+                                        <option>Skenario A — Efisiensi</option>
+                                        <option>Skenario B — Scale</option>
+                                        <option>Skenario C — Quality</option>
+                                    </select></div>
+                                <div class="f"><label>Reviewer</label><input value="Pejabat/Tim Berwenang"></div>
+                                <div class="f"><label>Keputusan</label><select>
+                                        <option>Review</option>
+                                        <option>Accept as Draft</option>
+                                        <option>Modify</option>
+                                        <option>Reject</option>
+                                    </select></div>
+                                <div class="f"><label>Alasan/Override</label><textarea></textarea></div>
+                                <div class="f"><label>Target Periode</label><input value="Kegiatan berikutnya"></div>
+                                <div class="f">
+                                    <label>Confidence/Limitations</label><textarea>Prototype: confidence harus dihitung dari kualitas dan jumlah data comparable.</textarea>
+                                </div>
+                            </div>
+                            <div class="actions"><button class="btn green">Convert ke Draft e-Planning</button><button
+                                    class="btn gray">Simpan ke Knowledge Base</button></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="action" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Smart Action Center</h1>
+                            <p>Satu antrean kerja berdasarkan role, unit, kewenangan dan SLA.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <table>
+                            <tr>
+                                <th>Prioritas</th>
+                                <th>Object</th>
+                                <th>Unit</th>
+                                <th>Action</th>
+                                <th>Due</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td>High</td>
+                                <td>LPJ-2026-0017</td>
+                                <td>Pengprov</td>
+                                <td>Finance Verification</td>
+                                <td>Hari ini</td>
+                                <td><span class="st bad">Overdue Risk</span></td>
+                            </tr>
+                            <tr>
+                                <td>Medium</td>
+                                <td>DSP-0042</td>
+                                <td>Dojo</td>
+                                <td>Disposition Response</td>
+                                <td>+2 hari</td>
+                                <td><span class="st pend">Open</span></td>
+                            </tr>
+                            <tr>
+                                <td>High</td>
+                                <td>FND-0019</td>
+                                <td>Pengkot</td>
+                                <td>CAPA Evidence</td>
+                                <td>Hari ini</td>
+                                <td><span class="st pend">Pending</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="portfolio" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Portfolio LPJ Nasional</h1>
+                            <p>Drill-down PB → Pengprov → Pengkot/Pengkab → Dojo → kegiatan → transaksi/evidence.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <table>
+                            <tr>
+                                <th>LPJ-ID</th>
+                                <th>Activity</th>
+                                <th>Unit</th>
+                                <th>Budget</th>
+                                <th>Actual</th>
+                                <th>Verification</th>
+                                <th>Finding</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td>LPJ-2026-0017</td>
+                                <td>Penataran</td>
+                                <td>Pengprov Jatim</td>
+                                <td>125 jt</td>
+                                <td>121 jt</td>
+                                <td>2/3</td>
+                                <td>1</td>
+                                <td><span class="st pend">Review</span></td>
+                            </tr>
+                            <tr>
+                                <td>LPJ-2026-0018</td>
+                                <td>Kejuaraan</td>
+                                <td>Pengkot A</td>
+                                <td>80 jt</td>
+                                <td>78 jt</td>
+                                <td>3/3</td>
+                                <td>0</td>
+                                <td><span class="st ok">Verified</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="mandate" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Input Mandat & Dasar Kegiatan</h1>
+                            <p>Titik awal: kegiatan tidak masuk pipeline pertanggungjawaban tanpa authority reference.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="form">
+                            <div class="f"><label>Mandate-ID</label><input value="MND-2026-0041"></div>
+                            <div class="f"><label>Jenis Dasar</label><select>
+                                    <option>Surat Keputusan</option>
+                                    <option>Surat Tugas</option>
+                                    <option>Program Kerja</option>
+                                    <option>Persetujuan</option>
+                                </select></div>
+                            <div class="f"><label>Nomor Dokumen</label><input value=".../PB/.../2026"></div>
+                            <div class="f"><label>Tanggal</label><input type="date" value="2026-10-03"></div>
+                            <div class="f"><label>Unit Pemilik</label><select>
+                                    <option>PB PERKEMI</option>
+                                    <option>Pengprov</option>
+                                    <option>Pengkot/Pengkab</option>
+                                    <option>Dojo</option>
+                                </select></div>
+                            <div class="f"><label>PIC</label><input value="Nama Penanggung Jawab"></div>
+                            <div class="f"><label>Nama Kegiatan</label><input value="Program/Kegiatan ..."></div>
+                            <div class="f"><label>Periode</label><input value="Oktober 2026"></div>
+                            <div class="f"><label>Dokumen Mandat</label><input type="file"></div>
+                        </div>
+                        <div class="actions"><button class="btn blue"
+                                onclick="alert('Prototype: MandateRegistered → Planning workspace dibuat.')">Validasi &
+                                Registrasi</button></div>
+                    </div>
+                    <div class="callout" style="margin-top:10px">Event: <b>MandateRegistered</b> → menghasilkan
+                        referensi untuk e-Planning, e-Budget, Activity-ID dan e-LPJ.</div>
+                </section>
+
+                <section id="planning" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>e-Planning</h1>
+                            <p>Tujuan, output, outcome, indikator, target, timeline, risiko dan kebutuhan sumber daya.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="form">
+                            <div class="f"><label>Mandate-ID</label><select>
+                                    <option>MND-2026-0041</option>
+                                </select></div>
+                            <div class="f"><label>Plan-ID</label><input value="PLN-2026-0041"></div>
+                            <div class="f"><label>Activity Type</label><select>
+                                    <option>Penataran</option>
+                                    <option>Kejuaraan</option>
+                                    <option>Rapat</option>
+                                    <option>Pembinaan</option>
+                                </select></div>
+                            <div class="f"><label>Tujuan</label><textarea>Peningkatan kompetensi...</textarea></div>
+                            <div class="f"><label>Output</label><textarea>Peserta menyelesaikan program...</textarea>
+                            </div>
+                            <div class="f"><label>Outcome</label><textarea>Peningkatan kualitas...</textarea></div>
+                            <div class="f"><label>Target Peserta</label><input value="150"></div>
+                            <div class="f"><label>KPI</label><input value="completion, satisfaction, competency"></div>
+                            <div class="f"><label>Risiko
+                                    Utama</label><textarea>Keterlambatan, partisipasi, biaya...</textarea></div>
+                        </div><button class="btn blue">Simpan & Ajukan Planning</button>
+                    </div>
+                </section>
+
+                <section id="budget" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>e-Budget / RAB</h1>
+                            <p>Budget line berversi dan terhubung ke transaksi aktual.</p>
+                        </div><button class="btn blue">+ Baris RAB</button>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="form">
+                            <div class="f"><label>Budget-ID</label><input value="BDG-2026-0041"></div>
+                            <div class="f"><label>Plan-ID</label><input value="PLN-2026-0041" disabled></div>
+                            <div class="f"><label>Version</label><input value="1.0"></div>
+                            <div class="f"><label>Akun</label><select>
+                                    <option>Akomodasi</option>
+                                    <option>Konsumsi</option>
+                                    <option>Perlengkapan</option>
+                                </select></div>
+                            <div class="f"><label>Uraian</label><input value="Konsumsi peserta"></div>
+                            <div class="f"><label>Qty × Unit Cost</label><input value="150 × 75.000"></div>
+                        </div>
+                        <div class="actions"><button class="btn blue">Simpan RAB</button><button
+                                class="btn green">Submit Approval</button></div>
+                    </div>
+                </section>
+
+                <section id="activity" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Pelaksanaan Kegiatan</h1>
+                            <p>Activity-ID menjadi primary linkage seluruh peserta, transaksi, evidence, output dan LPJ.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="form">
+                            <div class="f"><label>Activity-ID</label><input value="PBK-2026-DIKTAR-00017"></div>
+                            <div class="f"><label>Plan-ID</label><input value="PLN-2026-0041"></div>
+                            <div class="f"><label>Status</label><select>
+                                    <option>IN PROGRESS</option>
+                                    <option>COMPLETED</option>
+                                </select></div>
+                            <div class="f"><label>Tanggal Mulai</label><input type="date" value="2026-10-10"></div>
+                            <div class="f"><label>Tanggal Selesai</label><input type="date" value="2026-10-12"></div>
+                            <div class="f"><label>Lokasi</label><input value="Lokasi Kegiatan"></div>
+                            <div class="f"><label>Progress</label><input value="75%"></div>
+                            <div class="f"><label>Issue/Incident</label><textarea>Tidak ada isu mayor.</textarea></div>
+                            <div class="f"><label>Catatan PIC</label><textarea>Pelaksanaan sesuai agenda.</textarea>
+                            </div>
+                        </div><button class="btn blue">Update Pelaksanaan</button>
+                    </div>
+                </section>
+
+                <section id="participant" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Peserta, Panitia & SDM</h1>
+                            <p>Sinkron dari SIMPERKEMI/e-Event/e-Training jika tersedia; hindari input ulang.</p>
+                        </div><button class="btn blue">Import/Sync Peserta</button>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <table>
+                            <tr>
+                                <th>NIK/ID</th>
+                                <th>Nama</th>
+                                <th>Role</th>
+                                <th>Unit</th>
+                                <th>Attendance</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td>...011</td>
+                                <td>Peserta A</td>
+                                <td>Peserta</td>
+                                <td>Dojo A</td>
+                                <td>100%</td>
+                                <td><span class="st ok">Valid</span></td>
+                            </tr>
+                            <tr>
+                                <td>EMP-014</td>
+                                <td>Panitia B</td>
+                                <td>Finance</td>
+                                <td>Pengprov</td>
+                                <td>-</td>
+                                <td><span class="st ok">Assigned</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="transaction" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Transaksi & Realisasi</h1>
+                            <p>Transaction-ID terhubung ke budget line, payment/bank reference dan evidence.</p>
+                        </div><button class="btn blue">+ Transaksi</button>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="form">
+                            <div class="f"><label>Transaction-ID</label><input value="TRX-2026-00881"></div>
+                            <div class="f"><label>Activity-ID</label><input value="PBK-2026-DIKTAR-00017"></div>
+                            <div class="f"><label>Budget Line</label><select>
+                                    <option>Konsumsi</option>
+                                </select></div>
+                            <div class="f"><label>Tanggal</label><input type="date" value="2026-10-10"></div>
+                            <div class="f"><label>Penerima/Pembayar</label><input value="Vendor/Pihak"></div>
+                            <div class="f"><label>Amount</label><input value="11250000"></div>
+                            <div class="f"><label>Payment Method</label><select>
+                                    <option>Bank Transfer</option>
+                                    <option>Cash Authorized</option>
+                                </select></div>
+                            <div class="f"><label>Bank Reference</label><input value="BNK-882041"></div>
+                            <div class="f"><label>Evidence</label><input type="file"></div>
+                        </div><button class="btn blue">Post / Link Transaction</button>
+                    </div>
+                </section>
+
+                <section id="evidence" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Evidence Center</h1>
+                            <p>Evidence-ID + source linkage + uploader + timestamp + classification + verification
+                                status.</p>
+                        </div><button class="btn blue">+ Upload Evidence</button>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="form">
+                            <div class="f"><label>Evidence Type</label><select>
+                                    <option>Invoice/Kuitansi</option>
+                                    <option>Foto Kegiatan</option>
+                                    <option>Daftar Hadir</option>
+                                    <option>Berita Acara</option>
+                                </select></div>
+                            <div class="f"><label>Activity-ID</label><input value="PBK-2026-DIKTAR-00017"></div>
+                            <div class="f"><label>Transaction-ID</label><input value="TRX-2026-00881"></div>
+                            <div class="f"><label>File</label><input type="file"></div>
+                            <div class="f"><label>Keterangan</label><input value="Bukti transaksi"></div>
+                            <div class="f"><label>Klasifikasi</label><select>
+                                    <option>Internal</option>
+                                    <option>Restricted</option>
+                                </select></div>
+                        </div><button class="btn blue">Upload & Register</button>
+                    </div>
+                </section>
+
+                <section id="evaluation" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Evaluasi, Output & Outcome</h1>
+                            <p>Input hasil substantif menjadi basis LPJ dan analisis kegiatan berikutnya.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="form">
+                            <div class="f"><label>Output Achievement</label><input value="96%"></div>
+                            <div class="f"><label>Peserta Aktual</label><input value="146"></div>
+                            <div class="f"><label>Completion</label><input value="142"></div>
+                            <div class="f"><label>Satisfaction</label><input value="4.6/5"></div>
+                            <div class="f"><label>Outcome Evidence</label><input type="file"></div>
+                            <div class="f"><label>Lessons
+                                    Learned</label><textarea>Registrasi perlu dibuka lebih awal; evidence finance perlu real-time.</textarea>
+                            </div>
+                            <div class="f"><label>Yang Berjalan
+                                    Baik</label><textarea>Digital check-in dan materi terintegrasi.</textarea></div>
+                            <div class="f"><label>Perbaikan</label><textarea>Perkuat rekonsiliasi harian.</textarea>
+                            </div>
+                            <div class="f"><label>Rekomendasi
+                                    PIC</label><textarea>Gunakan model hybrid untuk sesi teori.</textarea></div>
+                        </div><button class="btn blue">Finalisasi Evaluasi</button>
+                    </div>
+                </section>
+
+                <section id="composer" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>LPJ Composer</h1>
+                            <p>LPJ disusun otomatis dari source records; pengguna melengkapi narasi yang memang
+                                membutuhkan penjelasan.</p>
+                        </div><button class="btn blue">Generate Draft LPJ</button>
+                    </div>
+                    <div class="grid modules">
+                        <div class="card mod">
+                            <h3>A. Identitas</h3>
+                            <p>Mandate, Activity-ID, unit, PIC, periode.</p><span class="st ok">100%</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>B. Planning</h3>
+                            <p>Tujuan, output, outcome, KPI.</p><span class="st ok">100%</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>C. Pelaksanaan</h3>
+                            <p>Agenda, peserta, progress, hasil.</p><span class="st ok">98%</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>D. Keuangan</h3>
+                            <p>Budget, actual, variance, transaction.</p><span class="st pend">94%</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>E. Evidence</h3>
+                            <p>Dokumen, foto, BA, transaction proof.</p><span class="st pend">92%</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>F. Evaluasi</h3>
+                            <p>Output, outcome, lessons learned.</p><span class="st ok">100%</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>G. Findings</h3>
+                            <p>Open finding/CAPA.</p><span class="st pend">1 open</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>H. Audit Pack</h3>
+                            <p>Version, approvals, audit history.</p><span class="st info">Auto</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="submit" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Submit & Version Snapshot</h1>
+                            <p>Submission membuat snapshot immutable; koreksi menghasilkan versi baru, bukan menimpa
+                                histori.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="title">Pre-Submission Check</div>
+                        <table>
+                            <tr>
+                                <th>Control</th>
+                                <th>Result</th>
+                                <th>Detail</th>
+                            </tr>
+                            <tr>
+                                <td>Required fields</td>
+                                <td><span class="st ok">PASS</span></td>
+                                <td>Complete</td>
+                            </tr>
+                            <tr>
+                                <td>Budget vs actual</td>
+                                <td><span class="st ok">PASS</span></td>
+                                <td>Balanced</td>
+                            </tr>
+                            <tr>
+                                <td>Evidence</td>
+                                <td><span class="st pend">WARNING</span></td>
+                                <td>2 supporting files pending</td>
+                            </tr>
+                            <tr>
+                                <td>Bank reconciliation</td>
+                                <td><span class="st ok">PASS</span></td>
+                                <td>96%</td>
+                            </tr>
+                        </table>
+                        <div class="actions"><button class="btn green">Submit LPJ v1.0</button></div>
+                    </div>
+                </section>
+
+                <section id="verify" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Digital Verification Center</h1>
+                            <p>System check → administratif → keuangan → substantif/compliance.</p>
+                        </div>
+                    </div>
+                    <div class="grid four">
+                        <div class="card">
+                            <div class="title">System</div><span class="st ok">PASS</span>
+                        </div>
+                        <div class="card">
+                            <div class="title">Administrative</div><span class="st ok">VERIFIED</span>
+                        </div>
+                        <div class="card">
+                            <div class="title">Financial</div><span class="st pend">IN REVIEW</span>
+                        </div>
+                        <div class="card">
+                            <div class="title">Substantive</div><span class="st info">QUEUED</span>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="form">
+                            <div class="f"><label>Checklist Domain</label><select>
+                                    <option>Financial Verification</option>
+                                </select></div>
+                            <div class="f"><label>Result</label><select>
+                                    <option>Verified</option>
+                                    <option>Finding</option>
+                                    <option>Return</option>
+                                </select></div>
+                            <div class="f"><label>Reviewer Notes</label><textarea></textarea></div>
+                            <div class="f"><label>Evidence Reviewed</label><input value="EV-101, EV-102"></div>
+                            <div class="f"><label>Material Exception</label><input value="None"></div>
+                            <div class="f"><label>Verification-ID</label><input value="VER-2026-0188" disabled></div>
+                        </div>
+                        <div class="actions"><button class="btn green">Verify</button><button class="btn orange">Raise
+                                Finding</button><button class="btn red">Return</button></div>
+                    </div>
+                </section>
+
+                <section id="disposition" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Disposisi Digital</h1>
+                            <p>Instruksi terstruktur dan dapat dilacak hingga penyelesaian.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="form">
+                            <div class="f"><label>Object</label><input value="LPJ-2026-0017"></div>
+                            <div class="f"><label>Dari</label><input value="Verifier"></div>
+                            <div class="f"><label>Kepada</label><select>
+                                    <option>Activity Owner</option>
+                                    <option>Finance PIC</option>
+                                </select></div>
+                            <div class="f"><label>Prioritas</label><select>
+                                    <option>High</option>
+                                    <option>Normal</option>
+                                </select></div>
+                            <div class="f"><label>Due Date</label><input type="date"></div>
+                            <div class="f">
+                                <label>Instruksi</label><textarea>Lengkapi evidence dan klarifikasi...</textarea>
+                            </div>
+                        </div><button class="btn blue">Kirim Disposisi</button>
+                    </div>
+                </section>
+
+                <section id="finding" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Findings & CAPA</h1>
+                            <p>Criteria → condition → cause → risk → recommendation → action → effectiveness
+                                verification.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="form">
+                            <div class="f"><label>Finding-ID</label><input value="FND-2026-0019"></div>
+                            <div class="f"><label>Domain</label><select>
+                                    <option>Finance</option>
+                                    <option>Administrative</option>
+                                    <option>Substantive</option>
+                                </select></div>
+                            <div class="f"><label>Severity</label><select>
+                                    <option>Medium</option>
+                                    <option>High</option>
+                                </select></div>
+                            <div class="f">
+                                <label>Condition</label><textarea>Evidence pendukung belum lengkap.</textarea>
+                            </div>
+                            <div class="f"><label>Root Cause</label><textarea>Upload terlambat.</textarea></div>
+                            <div class="f"><label>Risk</label><textarea>Keterlambatan verifikasi.</textarea></div>
+                            <div class="f"><label>Corrective
+                                    Action</label><textarea>Lengkapi bukti dan tetapkan kontrol upload harian.</textarea>
+                            </div>
+                            <div class="f"><label>Owner</label><input value="Finance PIC"></div>
+                            <div class="f"><label>Due</label><input type="date"></div>
+                        </div><button class="btn blue">Save CAPA</button>
+                    </div>
+                </section>
+
+                <section id="approval" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Approval e-LPJ</h1>
+                            <p>Approver melihat ringkasan, verification, finance, findings, dispositions dan audit
+                                history sebelum keputusan.</p>
+                        </div>
+                    </div>
+                    <div class="grid two">
+                        <div class="card">
+                            <div class="title">Decision Pack</div>
+                            <table>
+                                <tr>
+                                    <td>LPJ-ID</td>
+                                    <td><b>LPJ-2026-0017</b></td>
+                                </tr>
+                                <tr>
+                                    <td>Budget / Actual</td>
+                                    <td>125 jt / 121 jt</td>
+                                </tr>
+                                <tr>
+                                    <td>Verification</td>
+                                    <td>Admin ✓ Finance ✓ Substantive ✓</td>
+                                </tr>
+                                <tr>
+                                    <td>Open Finding</td>
+                                    <td>0 material</td>
+                                </tr>
+                                <tr>
+                                    <td>Reconciliation</td>
+                                    <td>100%</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card">
+                            <div class="title">Decision</div>
+                            <div class="f"><label>Catatan Keputusan</label><textarea></textarea></div>
+                            <div class="actions"><button class="btn green">Approve</button><button
+                                    class="btn orange">Clarification</button><button class="btn red">Return</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="verified" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>PB VERIFIED</h1>
+                            <p>Status final diberikan setelah seluruh gate yang diwajibkan terpenuhi sesuai authority
+                                matrix.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px;text-align:center">
+                        <h2>✓ SOBE e-LPJ VERIFIED</h2>
+                        <p><b>LPJ-2026-0017 • Version 1.2</b></p>
+                        <p class="sub">Verification-ID • Approval-ID • Timestamp • QR Verification • Authority Reference
+                        </p><button class="btn green">Generate Verified Pack</button>
+                    </div>
+                </section>
+
+                <section id="archive" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Digital Archive</h1>
+                            <p>Final LPJ + evidence pack + approvals + findings/CAPA + audit log + retention metadata.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <table>
+                            <tr>
+                                <th>Archive-ID</th>
+                                <th>LPJ-ID</th>
+                                <th>Version</th>
+                                <th>Unit</th>
+                                <th>Verified</th>
+                                <th>Retention</th>
+                                <th>Integrity</th>
+                            </tr>
+                            <tr>
+                                <td>ARC-2026-0188</td>
+                                <td>LPJ-2026-0017</td>
+                                <td>1.2</td>
+                                <td>Pengprov</td>
+                                <td>03/10/2026</td>
+                                <td>Policy-based</td>
+                                <td><span class="st ok">Valid</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="finance" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Finance & Rekonsiliasi</h1>
+                            <p>e-LPJ mengonsumsi ledger sumber; tidak membuat shadow ledger.</p>
+                        </div>
+                    </div>
+                    <div class="grid kpis">
+                        <div class="card kpi"><small>Budget</small><strong>125 jt</strong></div>
+                        <div class="card kpi"><small>Actual</small><strong>121 jt</strong></div>
+                        <div class="card kpi"><small>Variance</small><strong>4 jt</strong></div>
+                        <div class="card kpi"><small>Transactions</small><strong>84</strong></div>
+                        <div class="card kpi"><small>Reconciled</small><strong>96%</strong></div>
+                        <div class="card kpi"><small>Exceptions</small><strong>3</strong></div>
+                    </div>
+                </section>
+
+                <section id="ai" class="page">
+                    <div class="hero">
+                        <div><span class="pill">HUMAN-IN-THE-LOOP</span>
+                            <h1>AI LPJ Intelligence Center</h1>
+                            <p>Analisis kualitas pertanggungjawaban, efisiensi, outcome, risiko, anomali, compliance dan
+                                pembelajaran organisasi.</p>
+                        </div><button class="btn blue">Generate AI Brief</button>
+                    </div>
+                    <div class="grid modules">
+                        <div class="card mod ai">
+                            <h3>Completeness AI</h3>
+                            <p>Mendeteksi field/evidence yang belum lengkap atau tidak konsisten.</p>
+                        </div>
+                        <div class="card mod ai">
+                            <h3>Financial Intelligence</h3>
+                            <p>Variance, duplicate, unmatched, unusual pattern dan reconciliation signal.</p>
+                        </div>
+                        <div class="card mod ai">
+                            <h3>Outcome Analysis</h3>
+                            <p>Target vs actual, completion, participant impact dan KPI.</p>
+                        </div>
+                        <div class="card mod ai">
+                            <h3>Process Intelligence</h3>
+                            <p>Bottleneck, SLA aging, verifier workload dan rework.</p>
+                        </div>
+                        <div class="card mod ai">
+                            <h3>Finding Intelligence</h3>
+                            <p>Recurring finding, root-cause pattern dan CAPA effectiveness.</p>
+                        </div>
+                        <div class="card mod ai">
+                            <h3>Evidence Intelligence</h3>
+                            <p>Classification, missing linkage, duplicate signal dan quality review.</p>
+                        </div>
+                        <div class="card mod ai">
+                            <h3>Benchmarking</h3>
+                            <p>Bandingkan kegiatan sejenis berdasarkan periode/unit/tipe.</p>
+                        </div>
+                        <div class="card mod ai">
+                            <h3>Executive Narrative</h3>
+                            <p>Ringkasan berbasis sumber untuk pimpinan.</p>
+                        </div>
+                    </div>
+                    <div class="grid two">
+                        <div class="card">
+                            <div class="title">AI Analysis — Contoh Kegiatan</div>
+                            <table>
+                                <tr>
+                                    <th>Dimensi</th>
+                                    <th>Signal</th>
+                                    <th>Evidence</th>
+                                    <th>Interpretasi</th>
+                                </tr>
+                                <tr>
+                                    <td>Budget Efficiency</td>
+                                    <td><span class="st ok">Positive</span></td>
+                                    <td>Budget/Actual</td>
+                                    <td>Realisasi di bawah rencana tanpa penurunan output terindikasi</td>
+                                </tr>
+                                <tr>
+                                    <td>Participation</td>
+                                    <td><span class="st ok">97%</span></td>
+                                    <td>Participant</td>
+                                    <td>Target hampir tercapai</td>
+                                </tr>
+                                <tr>
+                                    <td>Outcome</td>
+                                    <td><span class="st ok">Strong</span></td>
+                                    <td>Evaluation</td>
+                                    <td>KPI utama tercapai</td>
+                                </tr>
+                                <tr>
+                                    <td>Evidence</td>
+                                    <td><span class="st pend">Improve</span></td>
+                                    <td>Evidence Center</td>
+                                    <td>Upload finance terlambat</td>
+                                </tr>
+                                <tr>
+                                    <td>Process</td>
+                                    <td><span class="st pend">Bottleneck</span></td>
+                                    <td>Workflow</td>
+                                    <td>Finance verification menjadi titik lambat</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card ai">
+                            <div class="title">AI Governance</div>
+                            <div class="airow">
+                                <div class="aic">✓</div>
+                                <div><b>Source & lineage</b>
+                                    <p>Insight menunjukkan Activity-ID/LPJ-ID dan periode sumber.</p>
+                                </div>
+                            </div>
+                            <div class="airow">
+                                <div class="aic">✓</div>
+                                <div><b>Explainability</b>
+                                    <p>Faktor, asumsi dan keterbatasan ditampilkan.</p>
+                                </div>
+                            </div>
+                            <div class="airow">
+                                <div class="aic">✓</div>
+                                <div><b>Human review</b>
+                                    <p>Reviewer menerima/menolak rekomendasi dengan alasan.</p>
+                                </div>
+                            </div>
+                            <div class="airow">
+                                <div class="aic">!</div>
+                                <div><b>AI tidak mengesahkan LPJ</b>
+                                    <p>Tidak approve, transfer dana, menutup finding final atau mengubah transaksi
+                                        sumber.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="next" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>AI Analisis Kegiatan Berikutnya</h1>
+                            <p>LPJ VERIFIED menjadi sumber organizational learning dan draft perencanaan kegiatan
+                                selanjutnya.</p>
+                        </div><button class="btn blue">Generate Next-Activity Options</button>
+                    </div>
+                    <div class="flow card" style="margin-top:11px">
+                        <div class="node">Verified LPJ</div><b>→</b>
+                        <div class="node">Lessons Learned</div><b>→</b>
+                        <div class="node">Historical Compare</div><b>→</b>
+                        <div class="node">AI Scenario</div><b>→</b>
+                        <div class="node">Human Review</div><b>→</b>
+                        <div class="node">Draft e-Planning</div>
+                    </div>
+                    <div class="grid three">
+                        <div class="card ai">
+                            <div class="title">Skenario A — Efisiensi</div>
+                            <p class="sub">Pertahankan output dengan simplifikasi proses administrasi dan evidence
+                                real-time.</p>
+                            <table>
+                                <tr>
+                                    <td>Target peserta</td>
+                                    <td>150</td>
+                                </tr>
+                                <tr>
+                                    <td>Format</td>
+                                    <td>Hybrid theory + onsite practical</td>
+                                </tr>
+                                <tr>
+                                    <td>Risk</td>
+                                    <td>Low–Medium</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card ai">
+                            <div class="title">Skenario B — Scale Up</div>
+                            <p class="sub">Kapasitas diperbesar dengan tambahan verifier dan dukungan digital.</p>
+                            <table>
+                                <tr>
+                                    <td>Target peserta</td>
+                                    <td>200</td>
+                                </tr>
+                                <tr>
+                                    <td>SDM</td>
+                                    <td>+ verification capacity</td>
+                                </tr>
+                                <tr>
+                                    <td>Risk</td>
+                                    <td>Medium</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card ai">
+                            <div class="title">Skenario C — Quality Focus</div>
+                            <p class="sub">Peserta dibatasi untuk meningkatkan coaching dan evaluasi outcome.</p>
+                            <table>
+                                <tr>
+                                    <td>Target peserta</td>
+                                    <td>120</td>
+                                </tr>
+                                <tr>
+                                    <td>Focus</td>
+                                    <td>Outcome & competency</td>
+                                </tr>
+                                <tr>
+                                    <td>Risk</td>
+                                    <td>Low</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="title">AI Recommendation Package</div>
+                        <div class="form">
+                            <div class="f"><label>Recommended
+                                    Objective</label><textarea>Mempertahankan kualitas output sambil mempercepat evidence capture dan verifikasi.</textarea>
+                            </div>
+                            <div class="f"><label>Recommended
+                                    Controls</label><textarea>Daily evidence checkpoint; pre-assigned verifier; bank reconciliation daily.</textarea>
+                            </div>
+                            <div class="f"><label>Recommended
+                                    KPI</label><textarea>Completion, outcome, evidence timeliness, reconciliation, LPJ SLA.</textarea>
+                            </div>
+                            <div class="f"><label>Lessons
+                                    Learned</label><textarea>Digital registration efektif; finance evidence perlu real-time.</textarea>
+                            </div>
+                            <div class="f"><label>Risk
+                                    Mitigation</label><textarea>Capacity planning dan fallback procedure.</textarea>
+                            </div>
+                            <div class="f"><label>Human Decision</label><select>
+                                    <option>Review Required</option>
+                                    <option>Accept as Draft</option>
+                                    <option>Reject</option>
+                                </select></div>
+                        </div><button class="btn green">Kirim sebagai Draft e-Planning</button>
+                    </div>
+                </section>
+
+                <section id="hierarchy" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Hierarki Pertanggungjawaban Nasional</h1>
+                            <p>Scope dan kewenangan mengikuti tingkat organisasi; data sumber tidak diketik ulang.</p>
+                        </div>
+                    </div>
+                    <div class="flow card" style="margin-top:11px">
+                        <div class="node">Dojo<br>Operational Record</div><b>→</b>
+                        <div class="node">Pengkot/Pengkab<br>Review</div><b>→</b>
+                        <div class="node">Pengprov<br>Oversight</div><b>→</b>
+                        <div class="node">PB PERKEMI<br>National Governance</div>
+                    </div>
+                </section>
+
+                <section id="integration" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Integration Hub</h1>
+                            <p>e-LPJ menarik data dari source systems Smart-PERKEMI melalui API/event integration.</p>
+                        </div>
+                    </div>
+                    <div class="grid modules">
+                        <div class="card mod">
+                            <h3>SIMPERKEMI</h3>
+                            <p>NIK, identity, hierarchy.</p><span class="st ok">Connected</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>Smart e-Dojo</h3>
+                            <p>Activity, training, finance, evidence.</p><span class="st ok">Connected</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>e-Pengkot/Pengkab</h3>
+                            <p>Review & portfolio.</p><span class="st ok">Connected</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>e-Pengprov</h3>
+                            <p>Oversight & aggregate.</p><span class="st ok">Connected</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>Training/Exam/Credential</h3>
+                            <p>Attendance, result, credential refs.</p><span class="st ok">Connected</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>e-Event</h3>
+                            <p>Participants, result, payment.</p><span class="st ok">Connected</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>e-Finance/Bank</h3>
+                            <p>Ledger, settlement, reconciliation.</p><span class="st ok">Connected</span>
+                        </div>
+                        <div class="card mod">
+                            <h3>e-Surat/e-Asset</h3>
+                            <p>Mandate, disposition, assets.</p><span class="st ok">Connected</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="audit" class="page">
+                    <div class="hero">
+                        <div>
+                            <h1>Audit & Compliance</h1>
+                            <p>WHO • WHAT • WHEN • WHERE/CHANNEL • OLD VALUE • NEW VALUE • AUTHORITY • REASON •
+                                EVIDENCE.</p>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:11px">
+                        <div class="timeline">
+                            <div class="tl"><b>10:21</b> — Activity Owner mengunggah EV-0102.</div>
+                            <div class="tl"><b>11:04</b> — Finance Verifier membuka TRX-00881.</div>
+                            <div class="tl"><b>11:16</b> — Finding FND-0019 dibuat.</div>
+                            <div class="tl"><b>14:31</b> — CAPA evidence diterima.</div>
+                            <div class="tl"><b>15:02</b> — Finding ditutup oleh verifier berwenang.</div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+    <script>
+        function go(id) { document.querySelectorAll('.page').forEach(x => x.classList.remove('on')); document.querySelectorAll('.nav').forEach(x => x.classList.toggle('on', x.dataset.p === id)); let e = document.getElementById(id); if (e) e.classList.add('on'); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+        document.querySelectorAll('.nav[data-p]').forEach(n => n.onclick = () => go(n.dataset.p)); document.querySelectorAll('.filter').forEach(f => f.onclick = () => { let box = f.parentElement; box.querySelectorAll('.filter').forEach(x => x.classList.remove('sel')); f.classList.add('sel') });
+    </script>
+</body>
+
+</html>
